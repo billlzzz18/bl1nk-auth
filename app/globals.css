@@ -35,9 +35,9 @@
   }
 
   body {
-    @apply bg-carbon-fiber text-gray-300 font-mono;
-    background-image: url("/assets/textures/carbon-noise.png");
+    @apply text-gray-300 font-mono;
     background-color: var(--bg-carbon-fiber);
+    background-image: url("/assets/textures/carbon-noise.png");
     color: rgb(var(--color-accent-light));
   }
 
