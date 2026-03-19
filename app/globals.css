@@ -47,7 +47,8 @@
   h4,
   h5,
   h6 {
-    @apply font-display tracking-wider;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.05em;
   }
 }
 
