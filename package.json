@@ -19,7 +19,7 @@
     "@heroicons/react": "2.2.0",
     "@octokit/rest": "^21.0.2",
     "@prisma/adapter-pg": "7.5.0",
-    "@prisma/client": "^7.3.0",
+    "@prisma/client": "7.5.0",
     "@tailwindcss/typography": "0.5.19",
     "@upstash/ratelimit": "2.0.8",
     "@upstash/redis": "1.36.1",
@@ -48,12 +48,13 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.30",
+    "@types/pg": "^8.11.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^8",
     "eslint-config-next": "15.1.3",
     "postcss": "^8.5",
-    "prisma": "^7.3.0",
+    "prisma": "7.5.0",
     "tsx": "^4.19.2",
     "typescript": "^5"
   },
