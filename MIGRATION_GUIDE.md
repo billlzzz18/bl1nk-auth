@@ -51,42 +51,42 @@ Follow these steps to update your branch:
 
 #### Step 1: Backup Your Changes
 
-```bash
+\`\`\`bash
 # Create a backup branch
 git checkout your-feature-branch
 git checkout -b your-feature-branch-backup
 
 # Return to your working branch
 git checkout your-feature-branch
-```
+\`\`\`
 
 #### Step 2: Merge/Rebase Main
 
-```bash
+\`\`\`bash
 # Option A: Merge main (recommended for most cases)
 git merge main
 
 # Option B: Rebase on main (for clean history)
 git rebase main
-```
+\`\`\`
 
 #### Step 3: Fix Import Conflicts
 
 If you have merge conflicts in import statements:
 
 **Before (your branch):**
-```typescript
+\`\`\`typescript
 import { LoginForm } from '@/components/auth/login-form'
 import GlassCard from '@/components/common/ui/GlassCard'
 import { AdminStats } from '@/components/dashboard/admin-stats'
-```
+\`\`\`
 
 **After (update to new paths):**
-```typescript
+\`\`\`typescript
 import { LoginForm } from '@/components/features/auth/login-form'
 import GlassCard from '@/components/shared/GlassCard'
 import { AdminStats } from '@/components/features/dashboard/admin-stats'
-```
+\`\`\`
 
 #### Step 4: Search and Replace
 
@@ -97,7 +97,7 @@ Use your editor's search-and-replace feature:
 2. Enable regex mode (.*) button
 3. Use these patterns:
 
-```
+\`\`\`
 # Find auth imports
 Find:    from ['"]@/components/auth/
 Replace: from '@/components/features/auth/
@@ -117,13 +117,13 @@ Replace: from '@/components/shared/
 # Find common layout imports
 Find:    from ['"]@/components/common/(Site|TopNav)
 Replace: from '@/components/layout/$1
-```
+\`\`\`
 
 #### Step 5: Handle Special Cases
 
 Some components moved to different categories:
 
-```typescript
+\`\`\`typescript
 // ThemeProvider moved to providers
 - import { ThemeProvider } from '@/components/common/ui/ThemeProvider'
 + import { ThemeProvider } from '@/components/providers/ThemeProvider'
@@ -135,13 +135,13 @@ Some components moved to different categories:
 // DashboardShell moved to layout
 - import { DashboardShell } from '@/components/common/ui/DashboardShell'
 + import { DashboardShell } from '@/components/layout/DashboardShell'
-```
+\`\`\`
 
 #### Step 6: Update Removed File References
 
 If your code references removed files:
 
-```typescript
+\`\`\`typescript
 // Old (removed files)
 - import Sidebar from '@/components/common/Sidebar'
 - import IconSidebar from '@/components/common/IconSidebar'
@@ -150,11 +150,11 @@ If your code references removed files:
 // New (use these instead)
 + import { Sidebar } from '@/components/ui/sidebar'  // shadcn sidebar
 + import { useIsMobile } from '@/hooks/use-mobile'
-```
+\`\`\`
 
 #### Step 7: Test Your Changes
 
-```bash
+\`\`\`bash
 # Run the build
 npm run build
 
@@ -163,7 +163,7 @@ npm run dev
 
 # Check for errors
 # Visit your feature pages and test functionality
-```
+\`\`\`
 
 ---
 
@@ -172,65 +172,65 @@ npm run dev
 ### Scenario 1: You Added New Auth Components
 
 **Your branch:**
-```typescript
+\`\`\`typescript
 // components/auth/magic-link.tsx
 import { LoginForm } from './login-form'
 import GlassCard from '@/components/common/ui/GlassCard'
-```
+\`\`\`
 
 **After migration:**
-```bash
+\`\`\`bash
 # Move your file
 git mv components/auth/magic-link.tsx components/features/auth/magic-link.tsx
 
 # Update imports in the file
 import { LoginForm } from './login-form'  # Still works (same directory)
 import GlassCard from '@/components/shared/GlassCard'
-```
+\`\`\`
 
 ### Scenario 2: You Modified Dashboard Components
 
 **Your branch:**
-```typescript
+\`\`\`typescript
 // Modified: components/dashboard/admin-stats.tsx
-```
+\`\`\`
 
 **After migration:**
-```bash
+\`\`\`bash
 # The file moved to:
 # components/features/dashboard/admin-stats.tsx
 
 # Cherry-pick your changes:
 git show your-commit:components/dashboard/admin-stats.tsx > temp.txt
 # Manually merge changes into components/features/dashboard/admin-stats.tsx
-```
+\`\`\`
 
 ### Scenario 3: You Created New Shared Components
 
 **Your branch:**
-```typescript
+\`\`\`typescript
 // components/common/ui/MyCard.tsx
-```
+\`\`\`
 
 **After migration:**
-```bash
+\`\`\`bash
 # Move to shared folder
 git mv components/common/ui/MyCard.tsx components/shared/MyCard.tsx
 
 # Update all imports in your codebase
 - import MyCard from '@/components/common/ui/MyCard'
 + import MyCard from '@/components/shared/MyCard'
-```
+\`\`\`
 
 ### Scenario 4: You Modified Tailwind Config
 
 **Your branch:**
-```javascript
+\`\`\`javascript
 // Modified: tailwind.config.js
-```
+\`\`\`
 
 **After migration:**
-```bash
+\`\`\`bash
 # tailwind.config.js was removed
 # Merge your changes into tailwind.config.ts
 
@@ -240,7 +240,7 @@ git show your-commit:tailwind.config.js
 # 2. Manually add to tailwind.config.ts
 # The new config already has all features merged
 # Just add your specific customizations
-```
+\`\`\`
 
 ---
 
@@ -248,7 +248,7 @@ git show your-commit:tailwind.config.js
 
 Use this bash script to automatically update imports:
 
-```bash
+\`\`\`bash
 #!/bin/bash
 # migrate-imports.sh
 
@@ -296,13 +296,13 @@ find . -type f \( -name "*.tsx" -o -name "*.ts" \) \
   -exec sed -i '' 's|@/components/common/Site|@/components/layout/Site|g' {} +
 
 echo "Migration complete! Please review changes and test."
-```
+\`\`\`
 
 **Usage:**
-```bash
+\`\`\`bash
 chmod +x migrate-imports.sh
 ./migrate-imports.sh
-```
+\`\`\`
 
 ---
 
@@ -327,22 +327,22 @@ If migration causes issues:
 
 ### Quick Rollback
 
-```bash
+\`\`\`bash
 # If you made a backup branch
 git checkout your-feature-branch-backup
 git branch -D your-feature-branch
 git checkout -b your-feature-branch
-```
+\`\`\`
 
 ### Partial Rollback
 
-```bash
+\`\`\`bash
 # Revert specific files
 git checkout HEAD~1 -- path/to/problematic/file.tsx
 
 # Or restore from backup
 git show your-feature-branch-backup:path/to/file.tsx > path/to/file.tsx
-```
+\`\`\`
 
 ---
 
