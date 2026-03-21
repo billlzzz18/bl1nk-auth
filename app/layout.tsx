@@ -1,17 +1,21 @@
-import './globals.css';
-import { ThemeProvider } from '@/components/ui/theme-provider';
-import { AccessibilityProvider } from '@/components/ui/accessibility-provider';
-import PageTransition from '@/components/ui/page-transition';
-import type { ReactNode, JSX } from 'react';
-import SiteNavbar from '@/components/layout/SiteNavbar';
-import SiteFooter from '@/components/layout/SiteFooter';
+import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { AccessibilityProvider } from "@/components/layout/AccessibilityProvider";
+import PageTransition from "@/components/shared/PageTransition";
+import type { ReactNode, JSX } from "react";
 
 export const metadata = {
-  title: 'bl1nk-auth',
-  description: 'OAuth gateway with marketing pages and floating docs assistant'
+  title: "bl1nk-auth",
+  description: "OAuth gateway with marketing pages and floating docs assistant",
+    generator: 'v0.app'
 };
 
-export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
+export default function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-dvh bg-background text-foreground">
@@ -22,13 +26,14 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
               ข้ามไปยังเนื้อหาหลัก
             </a>
 
-            <SiteNavbar />
             <PageTransition>
-              <main id="main-content" role="main">{children}</main>
+              <main id="main-content" role="main" className="flex-grow">
+                {children}
+              </main>
             </PageTransition>
-            <SiteFooter />
           </AccessibilityProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
