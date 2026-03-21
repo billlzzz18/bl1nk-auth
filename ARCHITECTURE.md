@@ -2,7 +2,7 @@
 
 ## Project Structure Overview
 
-```
+\`\`\`
 bl1nk-auth/
 ├── app/                          # Next.js 15 App Router
 │   ├── (routes)/
@@ -123,13 +123,13 @@ bl1nk-auth/
     ├── development/
     ├── security/
     └── setup/
-```
+\`\`\`
 
 ## Component Architecture
 
 ### Layer Hierarchy
 
-```
+\`\`\`
 ┌─────────────────────────────────────────────────────────────┐
 │                         App Layer                            │
 │  (pages, layouts, route handlers)                           │
@@ -153,12 +153,12 @@ bl1nk-auth/
                          │      UI Primitives         │
                          │   (shadcn/ui components)   │
                          └────────────────────────────┘
-```
+\`\`\`
 
 ### Import Guidelines
 
 **Best Practices:**
-```typescript
+\`\`\`typescript
 // ✅ GOOD - Feature imports
 import { LoginForm } from '@/components/features/auth/login-form'
 import { AdminStats } from '@/components/features/dashboard/admin-stats'
@@ -178,11 +178,11 @@ import { Card } from '@/components/ui/card'
 // ❌ BAD - Old paths (deprecated)
 import GlassCard from '@/components/common/ui/GlassCard'  // OLD
 import { AdminStats } from '@/components/dashboard/admin-stats'  // OLD
-```
+\`\`\`
 
 ## Data Flow Architecture
 
-```
+\`\`\`
 ┌──────────────────┐
 │   User Request   │
 └────────┬─────────┘
@@ -206,11 +206,11 @@ import { AdminStats } from '@/components/dashboard/admin-stats'  // OLD
    │  Client Components  │
    │  (use client)       │
    └─────────────────────┘
-```
+\`\`\`
 
 ## Authentication Flow
 
-```
+\`\`\`
 ┌──────────┐
 │   User   │
 └────┬─────┘
@@ -249,29 +249,29 @@ import { AdminStats } from '@/components/dashboard/admin-stats'  // OLD
          ┌──────────────────────┐
          │   Dashboard Redirect │
          └──────────────────────┘
-```
+\`\`\`
 
 ## Feature Module Pattern
 
 Each feature module follows this structure:
 
-```
+\`\`\`
 features/[feature-name]/
 ├── components/          # Feature-specific UI
 ├── hooks/              # Feature-specific hooks (optional)
 ├── types/              # Feature-specific types (optional)
 └── index.ts            # Public API (optional)
-```
+\`\`\`
 
 **Example - Auth Feature:**
-```
+\`\`\`
 features/auth/
 ├── BiometricAuth.tsx
 ├── BiometricLogin.tsx
 ├── login-form.tsx
 ├── register-form.tsx
 └── oauth-buttons.tsx
-```
+\`\`\`
 
 ## Design System
 
@@ -279,7 +279,7 @@ features/auth/
 
 Located in `/lib/theme/tokens.ts`:
 
-```typescript
+\`\`\`typescript
 {
   colors: {
     primary: 'hsl(var(--primary))',
@@ -296,11 +296,11 @@ Located in `/lib/theme/tokens.ts`:
     display: 'Orbitron',
   }
 }
-```
+\`\`\`
 
 ### Component Hierarchy
 
-```
+\`\`\`
 Custom Components
 ├── IOS26* (iOS 26 style)
 │   ├── IOS26Button
@@ -318,13 +318,13 @@ shadcn/ui Primitives
 ├── Card
 ├── Toast
 └── ... (other primitives)
-```
+\`\`\`
 
 ## API Architecture
 
 ### Route Structure
 
-```
+\`\`\`
 /api/
 ├── auth/[...nextauth]/    # NextAuth.js handler
 ├── login/                 # POST - Initiate login
@@ -336,11 +336,11 @@ shadcn/ui Primitives
 │   └── refresh/          # POST - Refresh token
 ├── dashboard/            # GET - Dashboard data
 └── worker/              # POST - Background jobs
-```
+\`\`\`
 
 ### Middleware Chain
 
-```
+\`\`\`
 Request
   │
   ▼
@@ -357,7 +357,7 @@ Route Handler
   │
   ▼
 Response
-```
+\`\`\`
 
 ## Database Schema
 
@@ -391,20 +391,20 @@ Using Prisma ORM with the following entities:
 
 ## Development Workflow
 
-```
+\`\`\`
 1. Feature Branch
    └─> 2. Component Development
         └─> 3. Integration Testing
              └─> 4. PR Review
                   └─> 5. Main Branch
                        └─> 6. Deployment
-```
+\`\`\`
 
 ## Environment Variables
 
 Required environment variables:
 
-```env
+\`\`\`env
 # Database
 DATABASE_URL=
 
@@ -420,11 +420,11 @@ GOOGLE_CLIENT_SECRET=
 
 # Analytics
 VERCEL_ANALYTICS_ID=
-```
+\`\`\`
 
 ## Deployment Architecture
 
-```
+\`\`\`
 ┌──────────────────┐
 │   Vercel Edge    │
 │    Network       │
@@ -443,7 +443,7 @@ VERCEL_ANALYTICS_ID=
 │   Database   │  │    Redis     │  │   External   │
 │   (Neon)     │  │   (Upstash)  │  │     APIs     │
 └──────────────┘  └──────────────┘  └──────────────┘
-```
+\`\`\`
 
 ---
 

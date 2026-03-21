@@ -41,7 +41,7 @@ Successfully completed a comprehensive refactoring of the bl1nk-auth codebase to
 
 ### New Folder Structure
 
-```
+\`\`\`
 /components/
 ├── features/           # Feature-specific components
 │   ├── auth/          # Authentication components
@@ -86,7 +86,7 @@ Successfully completed a comprehensive refactoring of the bl1nk-auth codebase to
 │   └── PageTransition.tsx
 └── ui/                # shadcn/ui components (unchanged)
     └── ...
-```
+\`\`\`
 
 ### Component Migrations (28 files moved)
 
@@ -144,18 +144,18 @@ Successfully completed a comprehensive refactoring of the bl1nk-auth codebase to
 ### Import Pattern Standardization
 
 **Before:**
-```typescript
+\`\`\`typescript
 import ThemeProvider from "@/components/common/ui/ThemeProvider";
 import GlassCard from "@/components/common/ui/GlassCard";
 import { AdminStats } from "@/components/dashboard/admin-stats";
-```
+\`\`\`
 
 **After:**
-```typescript
+\`\`\`typescript
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import GlassCard from "@/components/shared/GlassCard";
 import { AdminStats } from "@/components/features/dashboard/admin-stats";
-```
+\`\`\`
 
 ---
 
@@ -213,10 +213,10 @@ import { AdminStats } from "@/components/features/dashboard/admin-stats";
 ### Priority Testing Areas
 
 1. **Import Resolution**
-   ```bash
+   \`\`\`bash
    npm run build
    # Verify no import errors
-   ```
+   \`\`\`
 
 2. **Component Rendering**
    - Test all pages: `/`, `/auth`, `/dashboard`, `/admin`, `/profile`, `/team`
@@ -267,10 +267,10 @@ import { AdminStats } from "@/components/features/dashboard/admin-stats";
 ### Recommended Actions
 
 1. **Run Build & Test**
-   ```bash
+   \`\`\`bash
    npm run build
    npm run dev
-   ```
+   \`\`\`
 
 2. **Verify All Pages**
    - Navigate to each route
