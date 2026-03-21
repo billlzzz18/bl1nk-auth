@@ -18,10 +18,10 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'h-9 has-[>textarea]:h-auto',
 
         // Variants based on alignment.
-        'has-[>[data-align=inline-start]]:[&>input]:pl-2',
-        'has-[>[data-align=inline-end]]:[&>input]:pr-2',
-        'has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3',
-        'has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3',
+        'has-[>[data-align=inline-start]]:[&>input]:pl-2 has-[>[data-align=inline-start]]:[&>textarea]:pl-2',
+        'has-[>[data-align=inline-end]]:[&>input]:pr-2 has-[>[data-align=inline-end]]:[&>textarea]:pr-2',
+        'has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=block-start]]:[&>textarea]:pb-3',
+        'has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-end]]:[&>textarea]:pt-3',
 
         // Focus state.
         'has-[[data-slot=input-group-control]:focus-visible]:ring-ring has-[[data-slot=input-group-control]:focus-visible]:ring-1',
