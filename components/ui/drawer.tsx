@@ -1,19 +1,14 @@
 'use client'
 
 import * as React from 'react'
-import { Drawer as DrawerPrimitive } from 'vaul'
-
-import { cn } from '@/lib/utils'
+import * as DrawerPrimitive from '@radix-ui/react-dialog'
 
 const Drawer = ({
-  shouldScaleBackground = true,
+  shouldScaleBackground: _shouldScaleBackground = true,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerPrimitive.Root
-    shouldScaleBackground={shouldScaleBackground}
-    {...props}
-  />
-)
+}: React.ComponentProps<typeof DrawerPrimitive.Root> & {
+  shouldScaleBackground?: boolean
+}) => <DrawerPrimitive.Root {...props} />
 Drawer.displayName = 'Drawer'
 
 const DrawerTrigger = DrawerPrimitive.Trigger
