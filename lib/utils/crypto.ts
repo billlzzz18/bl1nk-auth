@@ -13,7 +13,8 @@ export interface TokenPayload extends JWTPayload {
   sub: string;
   email?: string;
   role?: UserRole;
-  type: "access" | "refresh";
+  type: "access" | "refresh" | "ott";
+  scope?: string[];
 }
 
 let privateKey: KeyLike | null = null;
