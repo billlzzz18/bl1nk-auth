@@ -47,6 +47,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@shelve/cli": "^4.1.7",
     "@types/node": "^20.19.30",
     "@types/pg": "^8.11.6",
     "@types/react": "^19",
