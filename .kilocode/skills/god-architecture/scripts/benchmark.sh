@@ -82,10 +82,12 @@ collect_metrics() {
         BUILD_TIME=$(measure_time "build" "npx vite build" 2>/dev/null || echo "skip")
         echo "     → $BUILD_TIME"
         METRICS=$(echo "$METRICS" | python3 -c "import sys,json; d=json.load(sys.stdin); d['build_time']='$BUILD_TIME'; print(json.dumps(d))" 2>/dev/null || echo "$METRICS")
+        METRICS=$(echo "$METRICS" | python3 -c "import sys,json; d=json.load(sys.stdin); d['build_time']='$BUILD_TIME'; print(json.dumps(d))" 2>/dev/null || echo "$METRICS")
     elif [ "$IS_RUST" = "yes" ]; then
         echo "  ⏱  Cargo build..."
         BUILD_TIME=$(measure_time "build" "cargo build --release" 2>/dev/null || echo "skip")
         echo "     → $BUILD_TIME"
+        METRICS=$(echo "$METRICS" | python3 -c "import sys,json; d=json.load(sys.stdin); d['build_time']='$BUILD_TIME'; print(json.dumps(d))" 2>/dev/null || echo "$METRICS")
         METRICS=$(echo "$METRICS" | python3 -c "import sys,json; d=json.load(sys.stdin); d['build_time']='$BUILD_TIME'; print(json.dumps(d))" 2>/dev/null || echo "$METRICS")
     fi
 
