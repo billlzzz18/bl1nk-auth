@@ -53,7 +53,7 @@ if [ "$HAS_GIT" = "yes" ]; then
         git add -A
         STASH_MSG="god-arch-backup: $LABEL"
         git stash push -m "$STASH_MSG" 2>/dev/null
-        STASH_REF=$(git stash list | grep "$STASH_MSG" | head -1 | cut -d: -f1)
+        STASH_REF=$(git stash list | grep -F "$STASH_MSG" | head -1 | cut -d: -f1 || true)
         echo "  ✅ Stash created: $STASH_REF"
     else
         echo "  ℹ️  Working tree clean — ไม่ต้อง stash"
