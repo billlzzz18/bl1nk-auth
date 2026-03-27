@@ -20,6 +20,11 @@ IS_TS=$([ -f "tsconfig.json" ] && echo "yes" || echo "no")
 IS_NODE=$([ -f "package.json" ] && echo "yes" || echo "no")
 HAS_RG=$(command -v rg &>/dev/null && echo "yes" || echo "no")
 
+if [ ! -d "$SRC_DIR" ]; then
+    echo "❌ Source directory not found: $SRC_DIR"
+    exit 1
+fi
+
 echo "╔══════════════════════════════════════════╗"
 echo "║  🔬 god-architecture — Duplicate Finder  ║"
 echo "╚══════════════════════════════════════════╝"
@@ -93,7 +98,7 @@ EOF
 
 if [ "$IS_TS" = "yes" ] && [ "$IS_NODE" = "yes" ]; then
     echo '```' >> "$REPORT_FILE"
-    npx --yes ts-prune 2>/dev/null | grep -v "used in module" | head -50 >> "$REPORT_FILE" || \
+    npx --yes ts-prune 2>/dev/null | { grep -v "used in module" || true; } | head -50 >> "$REPORT_FILE" || \
     echo "_ts-prune ไม่สามารถรันได้ — ตรวจสอบ tsconfig.json_" >> "$REPORT_FILE"
     echo '```' >> "$REPORT_FILE"
 else
@@ -134,9 +139,6 @@ cat >> "$REPORT_FILE" << 'EOF'
 > ตรวจหา pattern ที่ทำงานซ้ำกัน เช่น fetch logic, error handling, validation
 
 EOF
-
-SEARCH_CMD="${HAS_RG:+rg}"
-[ "$HAS_RG" = "no" ] && SEARCH_CMD="grep -r"
 
 # 4.1 Duplicate fetch/http
 echo "### 4.1 ไฟล์ที่มี HTTP/Fetch logic (อาจซ้ำกัน)" >> "$REPORT_FILE"

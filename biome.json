@@ -89,6 +89,19 @@
       "quoteStyle": "double",
       "semicolons": "always",
       "trailingCommas": "all"
-    }
+    },
+    "globals": [
+      "afterAll",
+      "afterEach",
+      "beforeAll",
+      "beforeEach",
+      "describe",
+      "expect",
+      "fdescribe",
+      "fit",
+      "it",
+      "jest",
+      "test"
+    ]
   }
 }

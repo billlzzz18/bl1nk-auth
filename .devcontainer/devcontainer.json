@@ -1,6 +1,6 @@
 {
-  "name": "bl1nk-devcontainer",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+  "name": "bl1nk-auth",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
@@ -12,54 +12,62 @@
       "userGid": "automatic"
     },
     "ghcr.io/devcontainers/features/git:1": {
-      "ppa": true,
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/github-cli:1": {
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "24",
+      "version": "22",
       "nodeGypDependencies": true
     },
-    "ghcr.io/devcontainers/features/rust:1": {
-      "version": "latest",
-      "profile": "default"
+    "ghcr.io/devcontainers/features/docker-in-docker:1": {
+      "version": "latest"
     }
   },
-
-  "forwardPorts": [3000, 8000, 8080],
+  "forwardPorts": [3000, 5555],
   "containerUser": "vscode",
   "updateRemoteUserUID": true,
-
   "postCreateCommand": "chmod +x ./.devcontainer/post-create.sh && ./.devcontainer/post-create.sh",
   "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
-
   "customizations": {
     "vscode": {
       "extensions": [
-        // Git
-        "mhutchie.git-graph",
-        "eamodio.gitlens",
-        // Claude Code
-        "anthropic.claude-code",
-        // GitHub Copilot
-        "GitHub.copilot",
-        "GitHub.copilot-chat",
-        // Python
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        // Node / TypeScript
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        // Rust
-        "rust-lang.rust-analyzer",
-        "tamasfe.even-better-toml"
+        "bradlc.vscode-tailwindcss",
+        "prisma.prisma",
+        "ms-python.vscode-pylance",
+        "formulahendry.auto-complete-tag",
+        "christian-kohler.path-intellisense",
+        "dsznajder.es7-react-js-snippets",
+        "ecmel.vscode-html-css",
+        "PKief.material-icon-theme",
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "vsls-contrib.gitdoc",
+        "VisualStudioExptTeam.vscodeintellicode"
       ],
       "settings": {
         "git.autofetch": true,
         "debug.javascript.autoAttachFilter": "disabled",
-        "python.defaultInterpreterPath": "/usr/local/bin/python"
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[markdown]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
       }
     }
   }

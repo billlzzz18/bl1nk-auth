@@ -41,7 +41,16 @@ for f in ".mcp.json" ".claude/mcp.json" ".claude/settings.json"; do
         echo "  ✅ Found: $f"
         echo "### $f" >> "$REPORT_FILE"
         echo '```json' >> "$REPORT_FILE"
-        cat "$PROJECT_PATH/$f" >> "$REPORT_FILE" 2>/dev/null | head -50
+        python3 -c "
+import json
+with open('$PROJECT_PATH/$f') as fh:
+    d = json.load(fh)
+    servers = d.get('mcpServers', d.get('mcp_servers', {}))
+    if servers:
+        print(json.dumps({'mcpServers': {k: {'command': v.get('command','?')} for k,v in servers.items()}}, indent=2))
+    else:
+        print(json.dumps({'notice': 'Config detected (non-MCP config, content redacted)'}, indent=2))
+" 2>/dev/null >> "$REPORT_FILE" || echo '{"notice":"Config detected (content redacted for security)"}' >> "$REPORT_FILE"
         echo '```' >> "$REPORT_FILE"
         echo "" >> "$REPORT_FILE"
         MCP_FOUND=$((MCP_FOUND + 1))

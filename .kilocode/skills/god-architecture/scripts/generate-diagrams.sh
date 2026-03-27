@@ -1,9 +1,13 @@
 #!/bin/bash
 # generate-diagrams.sh - Auto-generate diagrams for god-architecture skill
 
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 # 1. Project Tree
 echo "Generating project tree..."
-python3 scripts/automation.py
+python3 "$SCRIPT_DIR/automation.py"
 echo "Project tree saved to project-tree.txt"
 
 # 2. Mermaid Diagrams (Architecture Workflow)

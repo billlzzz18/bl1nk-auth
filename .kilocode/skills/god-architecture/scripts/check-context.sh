@@ -111,7 +111,10 @@ if [ $TOTAL -gt 0 ]; then
     if [ ${#WARNINGS[@]} -gt 0 ]; then
         echo "  <warnings>"
         for w in "${WARNINGS[@]}"; do
-            echo "    $w"
+            escaped_w=${w//&/&amp;}
+            escaped_w=${escaped_w//</&lt;}
+            escaped_w=${escaped_w//>/&gt;}
+            echo "    $escaped_w"
         done
         echo "  </warnings>"
     fi
@@ -119,7 +122,10 @@ if [ $TOTAL -gt 0 ]; then
     if [ ${#REMINDERS[@]} -gt 0 ]; then
         echo "  <reminders>"
         for r in "${REMINDERS[@]}"; do
-            echo "    $r"
+            escaped_r=${r//&/&amp;}
+            escaped_r=${escaped_r//</&lt;}
+            escaped_r=${escaped_r//>/&gt;}
+            echo "    $escaped_r"
         done
         echo "  </reminders>"
     fi
