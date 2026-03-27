@@ -140,15 +140,25 @@ else
     SNAPSHOT_DIR="$BACKUP_DIR/$LABEL"
 
     # Copy ทุกอย่างยกเว้น node_modules, dist, .next
-    rsync -a \
-        --exclude="node_modules" \
-        --exclude=".next" \
-        --exclude="dist" \
-        --exclude="build" \
-        --exclude="__pycache__" \
-        --exclude=".god-arch-backups" \
-        . "$SNAPSHOT_DIR/" 2>/dev/null || \
-    cp -r . "$SNAPSHOT_DIR/" 2>/dev/null
+    if command -v rsync >/dev/null 2>&1; then
+        rsync -a \
+            --exclude="node_modules" \
+            --exclude=".next" \
+            --exclude="dist" \
+            --exclude="build" \
+            --exclude="__pycache__" \
+            --exclude=".god-arch-backups" \
+            . "$SNAPSHOT_DIR/" 2>/dev/null
+    else
+        tar -cf - \
+            --exclude="node_modules" \
+            --exclude=".next" \
+            --exclude="dist" \
+            --exclude="build" \
+            --exclude="__pycache__" \
+            --exclude=".god-arch-backups" \
+            . 2>/dev/null | tar -xf - -C "$SNAPSHOT_DIR"
+    fi
 
     SNAPSHOT_SIZE=$(du -sh "$SNAPSHOT_DIR" 2>/dev/null | cut -f1)
 
