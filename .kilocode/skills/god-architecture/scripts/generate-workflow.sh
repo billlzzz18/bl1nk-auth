@@ -197,7 +197,7 @@ else
         "hooks": [
           {
             "type": "command",
-            "command": "bash scripts/check-context.sh --post-tool"
+            "command": "bash \"$SKILL_DIR/scripts/check-context.sh\" --post-tool"
           }
         ]
       }
