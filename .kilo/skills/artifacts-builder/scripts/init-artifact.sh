@@ -235,8 +235,9 @@ fs.writeFileSync('tsconfig.json', JSON.stringify(config, null, 2));
 "
 
 # Add path aliases to tsconfig.app.json
-echo "🔧 Adding path aliases to tsconfig.app.json..."
-node -e "
+if [ -f tsconfig.app.json ]; then
+  echo "🔧 Adding path aliases to tsconfig.app.json..."
+  node -e "
 const fs = require('fs');
 const path = 'tsconfig.app.json';
 const content = fs.readFileSync(path, 'utf8');
@@ -248,7 +249,8 @@ config.compilerOptions = config.compilerOptions || {};
 config.compilerOptions.baseUrl = '.';
 config.compilerOptions.paths = { '@/*': ['./src/*'] };
 fs.writeFileSync(path, JSON.stringify(config, null, 2));
-"
+  "
+fi
 
 # Update vite.config.ts
 echo "⚙️  Updating Vite configuration..."
