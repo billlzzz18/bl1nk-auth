@@ -59,11 +59,9 @@ def generate_project_tree(root_dir=".", output_file="project-tree.txt", max_dept
         except PermissionError:
             return
             
-        for i, item in enumerate(items):
-            if item in ignore_patterns:
-                continue
-            
-            is_last = (i == len(items) - 1)
+        visible_items = [item for item in items if item not in ignore_patterns]
+        for i, item in enumerate(visible_items):
+            is_last = (i == len(visible_items) - 1)
             prefix = "└── " if is_last else "├── "
             tree.append("  " * (depth - 1) + prefix + item)
             
