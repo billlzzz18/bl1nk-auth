@@ -73,7 +73,7 @@ for f in "$HOME/.gemini/config.json" "$HOME/.gemini/settings.json"; do
         echo "  ✅ Found (Gemini): $f"
         echo "### Gemini Config" >> "$REPORT_FILE"
         echo '```json' >> "$REPORT_FILE"
-        head -30 "$f" >> "$REPORT_FILE"
+        echo '{"notice":"Gemini config detected (content redacted for security)"}' >> "$REPORT_FILE"
         echo '```' >> "$REPORT_FILE"
         echo "" >> "$REPORT_FILE"
         MCP_FOUND=$((MCP_FOUND + 1))
