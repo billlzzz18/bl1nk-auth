@@ -69,7 +69,7 @@ with open('$f') as fh:
     d = json.load(fh)
     servers = d.get('mcpServers', {})
     print(json.dumps({'mcpServers': {k: {'command': v.get('command','?')} for k,v in servers.items()}}, indent=2))
-" 2>/dev/null >> "$REPORT_FILE" || head -30 "$f" >> "$REPORT_FILE"
+        " 2>/dev/null >> "$REPORT_FILE" || echo '{"warning": "Could not parse Claude MCP config; raw file not included to avoid exposing secrets."}' >> "$REPORT_FILE"
         echo '```' >> "$REPORT_FILE"
         echo "" >> "$REPORT_FILE"
         MCP_FOUND=$((MCP_FOUND + 1))
