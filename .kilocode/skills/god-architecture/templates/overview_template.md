@@ -23,7 +23,7 @@
 
 ## Complete Project Structure
 
-```
+```text
 [Project Root]/
 ├── [dir1]/
 │   └── [subdir]/

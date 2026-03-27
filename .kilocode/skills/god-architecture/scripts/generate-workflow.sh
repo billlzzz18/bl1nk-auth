@@ -44,21 +44,32 @@ import json
 with open('package.json') as f:
     p = json.load(f)
 s = p.get('scripts', {})
-print('INSTALL=' + ('$PM install --frozen-lockfile' if '$PM' != 'npm' else 'npm ci'))
-print('DEV=' + ('$PM ' + s.get('dev','dev') if 'dev' in s else ''))
-print('LINT=' + ('$PM ' + s.get('lint','lint') if 'lint' in s else ''))
-print('TEST=' + ('$PM ' + s.get('test','test') if 'test' in s else ''))
-print('CHECK=' + ('$PM ' + s.get('check','check') if 'check' in s else '$PM lint && $PM typecheck'))
-print('E2E=' + ('$PM ' + s.get('test:e2e','') if 'test:e2e' in s else ''))
+print('INSTALL_CMD=' + ('$PM install --frozen-lockfile' if '$PM' != 'npm' else 'npm ci'))
+print('DEV_CMD=' + ('$PM ' + s.get('dev','dev') if 'dev' in s else ''))
+print('LINT_CMD=' + ('$PM ' + s.get('lint','lint') if 'lint' in s else ''))
+print('TEST_CMD=' + ('$PM ' + s.get('test','test') if 'test' in s else ''))
+print('CHECK_CMD=' + ('$PM ' + s.get('check','check') if 'check' in s else '$PM lint && $PM typecheck'))
+print('E2E_CMD=' + ('$PM ' + s.get('test:e2e','') if 'test:e2e' in s else ''))
 " 2>/dev/null || echo "")
     if [ -n "$SCRIPTS" ]; then
-        eval "$SCRIPTS" 2>/dev/null || LINT_CMD="$PM lint"
+        while IFS='=' read -r key value; do
+            case "$key" in
+                INSTALL_CMD) INSTALL_CMD="$value" ;;
+                DEV_CMD) DEV_CMD="$value" ;;
+                LINT_CMD) LINT_CMD="$value" ;;
+                TEST_CMD) TEST_CMD="$value" ;;
+                CHECK_CMD) CHECK_CMD="$value" ;;
+                E2E_CMD) E2E_CMD="$value" ;;
+            esac
+        done <<< "$SCRIPTS"
     fi
 fi
 
-# Detect playwright
+# Detect playwright — only set E2E_CMD if not already detected from scripts
 HAS_PLAYWRIGHT=$(grep -l "playwright" package.json 2>/dev/null | wc -l | tr -d ' ' || echo "0")
-[ "${HAS_PLAYWRIGHT:-0}" -gt 0 ] && E2E_CMD="${PM} test:e2e" || E2E_CMD=""
+if [ "${HAS_PLAYWRIGHT:-0}" -gt 0 ] && [ -z "${E2E_CMD:-}" ]; then
+    E2E_CMD="${PM} test:e2e"
+fi
 
 echo "  Project: $PROJECT_NAME"
 echo "  PM: $PM | Install: $INSTALL_CMD"
@@ -195,6 +206,20 @@ else
 }
 HOOKEOF
     echo "  ✅ Created: .claude/settings.json (hooks configured)"
+fi
+
+# ───────────────────────────────────────────
+# STEP 5: Copy check-context.sh hook script
+# ───────────────────────────────────────────
+echo "▶ [+] Copying hook scripts..."
+
+mkdir -p scripts
+if [ ! -f "scripts/check-context.sh" ]; then
+    cp "$SKILL_DIR/scripts/check-context.sh" scripts/check-context.sh
+    chmod +x scripts/check-context.sh
+    echo "  ✅ Copied: scripts/check-context.sh"
+else
+    echo "  ✅ scripts/check-context.sh มีอยู่แล้ว"
 fi
 
 echo ""

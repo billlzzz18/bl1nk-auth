@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import type { JSX } from "react";
-import type { LocaleCode } from "@/lib/theme/tokens";
-import { designTokens, getLocalizedText } from "@/lib/theme/tokens";
 import ThemeToggle from "@/components/layout/ThemeToggle";
 import LiquidLogo from "@/components/shared/LiquidLogo";
+import type { LocaleCode } from "@/lib/theme/tokens";
+import { designTokens, getLocalizedText } from "@/lib/theme/tokens";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import type { JSX } from "react";
 
 type NavigationLink = {
   href: string;
@@ -49,9 +49,7 @@ function DualLineLabel({
   return (
     <span className="flex flex-col leading-tight">
       <span className="text-sm font-medium text-white">{label.th}</span>
-      <span className="text-xs uppercase tracking-wide text-white/60">
-        {label.en}
-      </span>
+      <span className="text-xs uppercase tracking-wide text-white/60">{label.en}</span>
     </span>
   );
 }
@@ -85,19 +83,14 @@ export default function SiteNavbar(): JSX.Element {
         <Link href="/" className="flex items-center gap-3">
           <LiquidLogo size={32} />
           <div className="flex flex-col">
-            <span className="text-lg font-semibold text-white">
-              {designTokens.brand.name}
-            </span>
-            <span className="text-xs text-white/70">
-              {designTokens.brand.tagline.th}
-            </span>
+            <span className="text-lg font-semibold text-white">{designTokens.brand.name}</span>
+            <span className="text-xs text-white/70">{designTokens.brand.tagline.th}</span>
           </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-5">
           {navigationLinks.map((item) => {
-            const isActive =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link
                 key={item.href}
@@ -118,7 +111,6 @@ export default function SiteNavbar(): JSX.Element {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-
           {/* Metrics Display */}
           <div className="flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full backdrop-blur-sm">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -165,22 +157,17 @@ export default function SiteNavbar(): JSX.Element {
             {mobileOpen
               ? getLocalizedText({ th: "ปิดเมนูนำทาง", en: "Close navigation" })
               : getLocalizedText({
-                th: "เปิดเมนูนำทาง",
-                en: "Open navigation",
-              })}
+                  th: "เปิดเมนูนำทาง",
+                  en: "Open navigation",
+                })}
           </span>
-          <div
-            className="flex flex-col items-center justify-center"
-            style={{ gap: "5px" }}
-          >
+          <div className="flex flex-col items-center justify-center" style={{ gap: "5px" }}>
             <span
               className="block w-6 transition-transform duration-200"
               style={{
                 height: "2px",
                 backgroundColor: designTokens.colors.foreground,
-                transform: mobileOpen
-                  ? "translateY(7px) rotate(45deg)"
-                  : "translateY(0)",
+                transform: mobileOpen ? "translateY(7px) rotate(45deg)" : "translateY(0)",
               }}
             />
             <span
@@ -196,9 +183,7 @@ export default function SiteNavbar(): JSX.Element {
               style={{
                 height: "2px",
                 backgroundColor: designTokens.colors.foreground,
-                transform: mobileOpen
-                  ? "translateY(-7px) rotate(-45deg)"
-                  : "translateY(0)",
+                transform: mobileOpen ? "translateY(-7px) rotate(-45deg)" : "translateY(0)",
               }}
             />
           </div>
@@ -223,9 +208,7 @@ export default function SiteNavbar(): JSX.Element {
               className="flex flex-col rounded-lg border px-4 py-3"
               style={{ borderColor: designTokens.colors.border }}
             >
-              <span className="text-sm font-semibold text-white">
-                {item.label.th}
-              </span>
+              <span className="text-sm font-semibold text-white">{item.label.th}</span>
               <span className="text-xs text-white/70">{item.label.en}</span>
             </Link>
           ))}

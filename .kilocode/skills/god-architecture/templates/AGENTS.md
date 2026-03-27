@@ -91,16 +91,19 @@
   ## Key Patterns
 
   ### IPC Communication
+  
   - Uses **tRPC** with `trpc-electron` for type-safe main↔renderer communication
   - All backend calls go through tRPC routers, not raw IPC
   - Preload exposes `window.desktopApi` for native features (window controls, clipboard, notifications)
 
   ### State Management
+
   - **Jotai**: UI state (selected chat, sidebar open, preview settings)
   - **Zustand**: Sub-chat tabs and pinned state (persisted to localStorage)
   - **React Query**: Server state via tRPC (auto-caching, refetch)
 
   ### Claude Integration
+  
   - Dynamic import of `@anthropic-ai/claude-code` SDK
   - Two modes: "plan" (read-only) and "agent" (full permissions)
   - Session resume via `sessionId` stored in SubChat

@@ -4,8 +4,11 @@
 // Prerequisites:
 // npm install --save-dev jest @types/jest ts-jest
 
+import {
+  GoogleCallbackHandler,
+  googleCallbackHandler,
+} from "@/lib/auth/providers/google/callbacks";
 import { GoogleStrategy, googleStrategy } from "@/lib/auth/providers/google/strategy";
-import { GoogleCallbackHandler, googleCallbackHandler } from "@/lib/auth/providers/google/callbacks";
 
 // ────────────────────────────────────────────────
 // Google Strategy Tests

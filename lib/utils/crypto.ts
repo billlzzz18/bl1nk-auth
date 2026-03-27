@@ -1,13 +1,6 @@
-import {
-  generateKeyPair,
-  exportJWK,
-  SignJWT,
-  jwtVerify,
-  importPKCS8,
-  importSPKI,
-} from "jose";
-import type { KeyLike, JWTPayload } from "jose";
-import { UserRole } from "@/lib/auth/roles";
+import type { UserRole } from "@/lib/auth/roles";
+import { SignJWT, exportJWK, generateKeyPair, importPKCS8, importSPKI, jwtVerify } from "jose";
+import type { JWTPayload, KeyLike } from "jose";
 
 export interface TokenPayload extends JWTPayload {
   sub: string;
@@ -29,10 +22,7 @@ async function ensureKeys() {
 
   try {
     if (privPem && pubPem) {
-      privateKey = (await importPKCS8(
-        privPem,
-        "RS256",
-      )) as unknown as CryptoKey;
+      privateKey = (await importPKCS8(privPem, "RS256")) as unknown as CryptoKey;
       publicKey = (await importSPKI(pubPem, "RS256")) as unknown as CryptoKey;
       return;
     }
@@ -75,10 +65,7 @@ export async function signJWT(
   }
 }
 
-export async function verifyJWT(
-  token: string,
-  { aud, iss }: { aud: string; iss: string },
-) {
+export async function verifyJWT(token: string, { aud, iss }: { aud: string; iss: string }) {
   try {
     await ensureKeys();
     const { payload } = await jwtVerify(token, publicKey!, {

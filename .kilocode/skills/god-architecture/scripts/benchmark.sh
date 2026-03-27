@@ -38,7 +38,9 @@ measure_time() {
     local cmd="$2"
     local start end elapsed
     start=$(date +%s%N 2>/dev/null || date +%s)
-    eval "$cmd" > /dev/null 2>&1 && STATUS="✅" || STATUS="⚠️"
+    if ! eval "$cmd" > /dev/null 2>&1; then
+        return 1
+    fi
     end=$(date +%s%N 2>/dev/null || date +%s)
 
     # ms calculation
@@ -79,10 +81,12 @@ collect_metrics() {
         echo "  ⏱  Vite build..."
         BUILD_TIME=$(measure_time "build" "npx vite build" 2>/dev/null || echo "skip")
         echo "     → $BUILD_TIME"
+        METRICS=$(echo "$METRICS" | python3 -c "import sys,json; d=json.load(sys.stdin); d['build_time']='$BUILD_TIME'; print(json.dumps(d))" 2>/dev/null || echo "$METRICS")
     elif [ "$IS_RUST" = "yes" ]; then
         echo "  ⏱  Cargo build..."
         BUILD_TIME=$(measure_time "build" "cargo build --release" 2>/dev/null || echo "skip")
         echo "     → $BUILD_TIME"
+        METRICS=$(echo "$METRICS" | python3 -c "import sys,json; d=json.load(sys.stdin); d['build_time']='$BUILD_TIME'; print(json.dumps(d))" 2>/dev/null || echo "$METRICS")
     fi
 
     # --- Test run ---
@@ -92,6 +96,7 @@ collect_metrics() {
             echo "  ⏱  Test suite..."
             TEST_TIME=$(measure_time "test" "npm test -- --passWithNoTests" 2>/dev/null || echo "skip")
             echo "     → $TEST_TIME"
+            METRICS=$(echo "$METRICS" | python3 -c "import sys,json; d=json.load(sys.stdin); d['test_time']='$TEST_TIME'; print(json.dumps(d))" 2>/dev/null || echo "$METRICS")
         fi
     fi
 
@@ -203,7 +208,7 @@ EOF
 case "$MODE" in
     baseline)
         echo "📸 Recording baseline..."
-        RESULT=$(collect_metrics)
+        RESULT=$(collect_metrics | sed -n '/^{/,$p')
         echo "$RESULT" > "$BASELINE_FILE"
         echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -219,7 +224,7 @@ case "$MODE" in
         fi
         echo "📊 Comparing against baseline..."
         BASELINE_DATA=$(cat "$BASELINE_FILE")
-        CURRENT=$(collect_metrics)
+        CURRENT=$(collect_metrics | sed -n '/^{/,$p')
         write_report "$CURRENT" "$BASELINE_DATA"
         echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -230,7 +235,7 @@ case "$MODE" in
 
     full|*)
         echo "📊 Full benchmark (no baseline)..."
-        CURRENT=$(collect_metrics)
+        CURRENT=$(collect_metrics | sed -n '/^{/,$p')
         write_report "$CURRENT"
         echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

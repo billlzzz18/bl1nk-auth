@@ -4,9 +4,9 @@
 // Prerequisites:
 // npm install --save-dev jest @types/jest ts-jest
 
+import { AUTH_CONFIG, getAvailableProviders, getCallbackUrl } from "@/lib/auth/core/config";
+import { createErrorResponse, handleAuthError, logAuthError } from "@/lib/auth/core/errors";
 import { AuthError, AuthErrorCode } from "@/lib/auth/core/types";
-import { AUTH_CONFIG, getCallbackUrl, getAvailableProviders } from "@/lib/auth/core/config";
-import { handleAuthError, createErrorResponse, logAuthError } from "@/lib/auth/core/errors";
 
 // ────────────────────────────────────────────────
 // Types Tests
@@ -43,11 +43,7 @@ describe("Auth Types", () => {
     });
 
     it("should not include detail in JSON if not provided", () => {
-      const error = new AuthError(
-        AuthErrorCode.AUTHENTICATION_FAILED,
-        "Auth failed",
-        500,
-      );
+      const error = new AuthError(AuthErrorCode.AUTHENTICATION_FAILED, "Auth failed", 500);
 
       const json = error.toJSON();
       expect(json.detail).toBeUndefined();
@@ -104,11 +100,7 @@ describe("Auth Config", () => {
 describe("Error Handling", () => {
   describe("createErrorResponse", () => {
     it("should create response from AuthError", () => {
-      const error = new AuthError(
-        AuthErrorCode.INVALID_TOKEN,
-        "Token invalid",
-        401,
-      );
+      const error = new AuthError(AuthErrorCode.INVALID_TOKEN, "Token invalid", 401);
       const response = createErrorResponse(error);
 
       expect(response.status).toBe(401);

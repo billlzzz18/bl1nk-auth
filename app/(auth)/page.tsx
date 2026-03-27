@@ -1,8 +1,8 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { getTranslations } from "next-intl/server";
-import { getConfig } from "@/lib/config";
 import { AuthContent } from "@/components/auth/auth-content";
+import { getConfig } from "@/lib/config";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -43,7 +43,9 @@ export default async function LoginPage() {
         {hasCredentials && (
           <p className="text-center text-xs text-muted-foreground">
             {t("noAccount")}{" "}
-            <Link href="/register" className="text-foreground hover:underline">{t("register")}</Link>
+            <Link href="/register" className="text-foreground hover:underline">
+              {t("register")}
+            </Link>
           </p>
         )}
       </div>

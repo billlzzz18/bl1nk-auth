@@ -18,22 +18,15 @@ export function AccessibilitySettings() {
 
   return (
     <IOS26Card className="p-6 max-w-md">
-      <h3 className="text-lg font-semibold mb-4 text-foreground">
-        การตั้งค่าการเข้าถึง
-      </h3>
+      <h3 className="text-lg font-semibold mb-4 text-foreground">การตั้งค่าการเข้าถึง</h3>
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <label
-              htmlFor="high-contrast"
-              className="font-medium text-foreground"
-            >
+            <label htmlFor="high-contrast" className="font-medium text-foreground">
               ความคมชัดสูง
             </label>
-            <p className="text-sm text-muted-foreground">
-              เพิ่มความคมชัดของสีเพื่อการมองเห็นที่ดีขึ้น
-            </p>
+            <p className="text-sm text-muted-foreground">เพิ่มความคมชัดของสีเพื่อการมองเห็นที่ดีขึ้น</p>
           </div>
           <button
             id="high-contrast"
@@ -58,9 +51,7 @@ export function AccessibilitySettings() {
             <label htmlFor="large-text" className="font-medium text-foreground">
               ข้อความขนาดใหญ่
             </label>
-            <p className="text-sm text-muted-foreground">
-              เพิ่มขนาดตัวอักษรสำหรับการอ่านที่ง่ายขึ้น
-            </p>
+            <p className="text-sm text-muted-foreground">เพิ่มขนาดตัวอักษรสำหรับการอ่านที่ง่ายขึ้น</p>
           </div>
           <button
             id="large-text"
@@ -82,15 +73,10 @@ export function AccessibilitySettings() {
 
         <div className="flex items-center justify-between">
           <div>
-            <label
-              htmlFor="reduce-motion"
-              className="font-medium text-foreground"
-            >
+            <label htmlFor="reduce-motion" className="font-medium text-foreground">
               ลดการเคลื่อนไหว
             </label>
-            <p className="text-sm text-muted-foreground">
-              ลดหรือปิดใช้งานแอนิเมชันเพื่อความสบายตา
-            </p>
+            <p className="text-sm text-muted-foreground">ลดหรือปิดใช้งานแอนิเมชันเพื่อความสบายตา</p>
           </div>
           <button
             id="reduce-motion"
@@ -112,15 +98,10 @@ export function AccessibilitySettings() {
 
         <div className="flex items-center justify-between">
           <div>
-            <label
-              htmlFor="voice-navigation"
-              className="font-medium text-foreground"
-            >
+            <label htmlFor="voice-navigation" className="font-medium text-foreground">
               นำทางด้วยเสียง
             </label>
-            <p className="text-sm text-muted-foreground">
-              ใช้ Ctrl+V เพื่อฟังเนื้อหาขององค์ประกอบที่เลือก
-            </p>
+            <p className="text-sm text-muted-foreground">ใช้ Ctrl+V เพื่อฟังเนื้อหาขององค์ประกอบที่เลือก</p>
           </div>
           <button
             id="voice-navigation"
@@ -142,9 +123,7 @@ export function AccessibilitySettings() {
       </div>
 
       <div className="mt-6 pt-4 border-t border-border">
-        <p className="text-xs text-muted-foreground">
-          การตั้งค่าเหล่านี้จะถูกบันทึกและใช้ในครั้งต่อไปที่คุณเข้าชม
-        </p>
+        <p className="text-xs text-muted-foreground">การตั้งค่าเหล่านี้จะถูกบันทึกและใช้ในครั้งต่อไปที่คุณเข้าชม</p>
       </div>
     </IOS26Card>
   );

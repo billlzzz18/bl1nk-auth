@@ -1,6 +1,7 @@
 # Template: NestJS Project Structure
 
 ## สร้างโปรเจกต์ใหม่
+
 ```bash
 npm i -g @nestjs/cli
 nest new my-api --package-manager pnpm
@@ -11,7 +12,8 @@ nest generate service [feature]
 ```
 
 ## Directory Structure
-```
+
+```text
 my-api/
 ├── src/
 │   ├── main.ts

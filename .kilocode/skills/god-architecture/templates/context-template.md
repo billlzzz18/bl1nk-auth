@@ -36,7 +36,7 @@
 → Stack: [ระบุ tech stack หลัก]
 → Structure: [monorepo / single-app / fullstack]
 
-```
+```text
 [PROJECT_ROOT]/
 ├── [dir1]/     # [หน้าที่]
 ├── [dir2]/     # [หน้าที่]

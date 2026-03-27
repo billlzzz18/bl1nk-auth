@@ -4,8 +4,11 @@
 // Prerequisites:
 // npm install --save-dev jest @types/jest ts-jest
 
+import {
+  GitHubCallbackHandler,
+  githubCallbackHandler,
+} from "@/lib/auth/providers/github/callbacks";
 import { GitHubStrategy, githubStrategy } from "@/lib/auth/providers/github/strategy";
-import { GitHubCallbackHandler, githubCallbackHandler } from "@/lib/auth/providers/github/callbacks";
 
 // ────────────────────────────────────────────────
 // GitHub Strategy Tests

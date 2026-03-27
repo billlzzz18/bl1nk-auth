@@ -50,9 +50,8 @@ if [ "$HAS_GIT" = "yes" ]; then
     STASH_REF=""
     if [ "$DIRTY" -gt 0 ]; then
         echo "  📦 Stashing $DIRTY uncommitted files..."
-        git add -A
         STASH_MSG="god-arch-backup: $LABEL"
-        git stash push -m "$STASH_MSG" 2>/dev/null
+        git stash push --include-untracked -m "$STASH_MSG" 2>/dev/null
         STASH_REF=$(git stash list | grep -F "$STASH_MSG" | head -1 | cut -d: -f1 || true)
         echo "  ✅ Stash created: $STASH_REF"
     else
