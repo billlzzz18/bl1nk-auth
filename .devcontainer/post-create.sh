@@ -9,7 +9,7 @@ pip install uv modal fastapi uvicorn
 # --- Node global tools ---
 npm install -g pnpm
 # bun
-curl -fsSL https://bun.sh/install | bash
+npm install -g bun
 
 # --- Rust tools ---
 cargo install tauri-cli --version "^2"
