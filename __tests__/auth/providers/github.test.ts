@@ -44,11 +44,9 @@ describe("GitHub Strategy", () => {
 describe("GitHub Callback Handler", () => {
   describe("GitHubCallbackHandler class", () => {
     it("should be a singleton", () => {
-      const handler1 = new GitHubCallbackHandler();
-      const handler2 = new GitHubCallbackHandler();
-      // Both should work independently
-      expect(handler1).toBeDefined();
-      expect(handler2).toBeDefined();
+          const handler1: GitHubCallbackHandler = githubCallbackHandler;
+          const handler2: GitHubCallbackHandler = githubCallbackHandler;
+          expect(handler1).toBe(handler2);
     });
   });
 });
