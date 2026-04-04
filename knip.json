@@ -1,44 +1,60 @@
 {
-  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
     "app/**/*.{ts,tsx}",
     "pages/**/*.{ts,tsx}",
-    "scripts/**/*.ts",
-    "next.config.mjs",
-    "postcss.config.mjs",
-    "tailwind.config.ts"
+    "components/**/*.{ts,tsx}",
+    "lib/**/*.ts",
+    "scripts/**/*.ts"
   ],
-  "project": ["**/*.{ts,tsx,js,jsx,mjs,cjs}", "!node_modules/**", "!dist/**", "!.next/**"],
+  "project": [
+    "**/*.{ts,tsx,js,jsx}"
+  ],
   "ignore": [
-    "node_modules/**",
-    ".next/**",
-    "dist/**",
-    "build/**",
-    "public/**",
     "**/*.d.ts",
-    "prisma/**",
-    "__tests__/**",
-    "components/**"
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "playwright/**",
+    ".next/**",
+    "node_modules/**"
   ],
-  "ignoreBinaries": ["prisma", "next", "pnpm", "bun"],
   "ignoreDependencies": [
+    "@types/*",
+    "autoprefixer",
+    "postcss",
+    "tailwindcss",
+    "tailwindcss-animate",
+    "tw-animate-css",
+    "prisma",
+    "tsx",
     "pg-native",
-    "@types/node",
-    "@types/react",
-    "@types/react-dom",
-    "@types/pg",
-    "@prisma/client"
+    "better-sqlite3"
   ],
-  "rules": {
-    "files": "error",
-    "dependencies": "error",
-    "unlisted": "error",
-    "binaries": "error",
-    "exports": "error",
-    "types": "error",
-    "duplicates": "warn"
-  },
+  "ignoreBinaries": [
+    "prisma",
+    "tsx"
+  ],
   "next": {
-    "config": ["next.config.mjs"]
+    "entry": [
+      "app/**/page.{ts,tsx}",
+      "app/**/layout.{ts,tsx}",
+      "app/**/route.{ts,tsx}",
+      "app/**/loading.{ts,tsx}",
+      "app/**/error.{ts,tsx}",
+      "app/**/not-found.{ts,tsx}",
+      "middleware.{ts,tsx}"
+    ]
+  },
+  "rules": {
+    "files": "warn",
+    "dependencies": "error",
+    "devDependencies": "warn",
+    "optionalPeerDependencies": "off",
+    "unlisted": "warn",
+    "binaries": "warn",
+    "unresolved": "error",
+    "exports": "warn",
+    "types": "warn",
+    "duplicates": "error"
   }
 }
