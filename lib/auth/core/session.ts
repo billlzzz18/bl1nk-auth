@@ -106,9 +106,10 @@ export async function createSessionResponse(
 }
 
 // ────────────────────────────────────────────────
+// ────────────────────────────────────────────────
 // Create Logout Response
 // ────────────────────────────────────────────────
-export function createLogoutResponse(): NextResponse {
+export function createLogoutResponse(origin?: string | null): NextResponse {
   const response = NextResponse.json({ ok: true });
   response.cookies.set(AUTH_CONFIG.cookie.refreshName, "", {
     httpOnly: true,
@@ -117,5 +118,9 @@ export function createLogoutResponse(): NextResponse {
     path: "/",
     maxAge: 0,
   });
+  if (origin) {
+    response.headers.set("Access-Control-Allow-Origin", origin);
+    response.headers.set("Access-Control-Allow-Credentials", "true");
+  }
   return response;
 }
