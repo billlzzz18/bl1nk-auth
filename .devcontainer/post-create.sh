@@ -1,6 +1,6 @@
 # .devcontainer/post-create.sh
 #!/bin/bash
-set -e
+set -euo pipefail
 
 # --- Python tools ---
 pip install --upgrade pip
