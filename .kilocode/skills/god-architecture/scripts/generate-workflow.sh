@@ -45,11 +45,11 @@ with open('package.json') as f:
     p = json.load(f)
 s = p.get('scripts', {})
 print('INSTALL_CMD=' + ('$PM install --frozen-lockfile' if '$PM' != 'npm' else 'npm ci'))
-print('DEV_CMD=' + ('$PM ' + s.get('dev','dev') if 'dev' in s else ''))
-print('LINT_CMD=' + ('$PM ' + s.get('lint','lint') if 'lint' in s else ''))
-print('TEST_CMD=' + ('$PM ' + s.get('test','test') if 'test' in s else ''))
-print('CHECK_CMD=' + ('$PM ' + s.get('check','check') if 'check' in s else '$PM lint && $PM typecheck'))
-print('E2E_CMD=' + ('$PM ' + s.get('test:e2e','') if 'test:e2e' in s else ''))
+print('DEV_CMD=' + ('$PM run dev' if 'dev' in s else ''))
+print('LINT_CMD=' + ('$PM run lint' if 'lint' in s else ''))
+print('TEST_CMD=' + ('$PM run test' if 'test' in s else ''))
+print('CHECK_CMD=' + ('$PM run check' if 'check' in s else '$PM run lint \\&\\& $PM run typecheck'))
+print('E2E_CMD=' + ('$PM run test:e2e' if 'test:e2e' in s else ''))
 " 2>/dev/null || echo "")
     if [ -n "$SCRIPTS" ]; then
         while IFS='=' read -r key value; do
