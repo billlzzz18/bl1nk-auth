@@ -13,7 +13,7 @@ export interface TokenPayload extends JWTPayload {
   sub: string;
   email?: string;
   role?: UserRole;
-  type: "access" | "refresh" | "ott";
+  type?: "access" | "refresh" | "ott";
   scope?: string[];
 }
 
