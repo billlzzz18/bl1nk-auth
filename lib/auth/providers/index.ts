@@ -32,7 +32,8 @@ export function getProvider(name: string): ProviderStrategy | null {
 // Get Callback Handler
 // ────────────────────────────────────────────────
 export function getCallbackHandler(name: string): CallbackHandler | null {
-  return callbackHandlers[name] ?? null;
+  if (!Object.hasOwn(callbackHandlers, name)) return null;
+  return callbackHandlers[name];
 }
 
 // ────────────────────────────────────────────────
