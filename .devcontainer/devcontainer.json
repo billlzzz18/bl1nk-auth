@@ -37,16 +37,11 @@
         "esbenp.prettier-vscode",
         "bradlc.vscode-tailwindcss",
         "prisma.prisma",
-        "ms-python.vscode-pylance",
-        "formulahendry.auto-complete-tag",
-        "christian-kohler.path-intellisense",
-        "dsznajder.es7-react-js-snippets",
-        "ecmel.vscode-html-css",
-        "PKief.material-icon-theme",
+        "anthropic.claude-code",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
         "mhutchie.git-graph",
-        "eamodio.gitlens",
-        "vsls-contrib.gitdoc",
-        "VisualStudioExptTeam.vscodeintellicode"
+        "eamodio.gitlens"
       ],
       "settings": {
         "git.autofetch": true,
