@@ -21,7 +21,13 @@ echo "📦 Installing bundling dependencies..."
 pnpm add -D parcel @parcel/config-default parcel-resolver-tspaths html-inline
 
 # Create Parcel config with tspaths resolver
-if [ ! -f ".parcelrc" ]; then
+if [ -f ".parcelrc" ]; then
+  if ! grep -q 'parcel-resolver-tspaths' .parcelrc; then
+    echo "❌ Error: Existing .parcelrc does not enable parcel-resolver-tspaths."
+    echo "   Add it to the resolvers list or remove .parcelrc and rerun."
+    exit 1
+  fi
+else
   echo "🔧 Creating Parcel configuration with path alias support..."
   cat > .parcelrc << 'EOF'
 {
